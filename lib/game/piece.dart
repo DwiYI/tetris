@@ -8,4 +8,5 @@ abstract class Piece {
 
   void moveLeft();
   void moveRight();
+  void flip();
 }

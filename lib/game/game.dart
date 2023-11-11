@@ -52,7 +52,15 @@ class _GameState extends State<Game> {
                                   width: 70,
                                   height: 70,
                                   child: ElevatedButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        for (var i = 0; i < pp.length; i++) {
+                                          if (pp[i].isActive) {
+                                            setState(() {
+                                              pp[i].flip();
+                                            });
+                                          }
+                                        }
+                                      },
                                       child: const Icon(
                                           Icons.flip_camera_android_outlined)),
                                 ),
