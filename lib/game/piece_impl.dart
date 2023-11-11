@@ -18,7 +18,7 @@ class PieceImpl implements DrawPiece {
     } else {
       size = 360 / 16;
     }
-
+    print('$x $y');
     canvas.save();
     canvas.translate((-width / 2) + (width - 360) / 2 + 10, 0);
     canvas.drawRect(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:tetris/game/game_process.dart';
+import 'package:tetris/game/l_piece.dart';
+import 'package:tetris/game/piece.dart';
 
 class Game extends StatefulWidget {
   const Game({super.key});
@@ -10,6 +12,7 @@ class Game extends StatefulWidget {
 }
 
 class _GameState extends State<Game> {
+  var pp = <Piece>[LPiece(x: 0, y: 0)];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,6 +20,7 @@ class _GameState extends State<Game> {
             builder: (context, constraints) => Column(
                   children: [
                     GameProcess(
+                        pieces: pp,
                         maxWidth: constraints.maxWidth,
                         maxHeight: constraints.maxHeight),
                     Card(
@@ -31,7 +35,15 @@ class _GameState extends State<Game> {
                                   width: 70,
                                   height: 70,
                                   child: ElevatedButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        for (var i = 0; i < pp.length; i++) {
+                                          if (pp[i].isActive) {
+                                            setState(() {
+                                              pp[i].moveLeft();
+                                            });
+                                          }
+                                        }
+                                      },
                                       child: const Icon(
                                         AntDesign.caretleft,
                                       )),
@@ -48,7 +60,15 @@ class _GameState extends State<Game> {
                                   width: 70,
                                   height: 70,
                                   child: ElevatedButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        for (var i = 0; i < pp.length; i++) {
+                                          if (pp[i].isActive) {
+                                            setState(() {
+                                              pp[i].moveRight();
+                                            });
+                                          }
+                                        }
+                                      },
                                       child: const Icon(
                                         AntDesign.caretright,
                                       )),

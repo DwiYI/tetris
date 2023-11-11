@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:tetris/game/game_painter.dart';
 import 'package:tetris/game/grid_painter.dart';
-import 'package:tetris/game/l_piece.dart';
 import 'package:tetris/game/piece.dart';
 
 class GameProcess extends StatefulWidget {
   const GameProcess(
-      {super.key, required this.maxWidth, required this.maxHeight});
+      {super.key,
+      required this.maxWidth,
+      required this.maxHeight,
+      required this.pieces});
   final double maxHeight;
   final double maxWidth;
+  final List<Piece> pieces;
 
   @override
   State<GameProcess> createState() => _GameProcessState();
 }
 
 class _GameProcessState extends State<GameProcess> {
-  var dp = <Piece>[LPiece(x: 0, y: 0)];
   @override
   void initState() {
     super.initState();
@@ -33,7 +35,9 @@ class _GameProcessState extends State<GameProcess> {
             ),
             CustomPaint(
               painter: GamePainter(
-                  pieces: dp, width: widget.maxWidth, height: widget.maxHeight),
+                  pieces: widget.pieces,
+                  width: widget.maxWidth,
+                  height: widget.maxHeight),
             ),
           ],
         ),
