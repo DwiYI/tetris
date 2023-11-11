@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:tetris/game/game_process.dart';
+import 'package:tetris/game/j_piece.dart';
 import 'package:tetris/game/l_piece.dart';
 import 'package:tetris/game/piece.dart';
 
@@ -12,7 +13,7 @@ class Game extends StatefulWidget {
 }
 
 class _GameState extends State<Game> {
-  var pp = <Piece>[LPiece(x: 0, y: 0)];
+  var pp = <Piece>[JPiece()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
