@@ -38,7 +38,7 @@ class LPiece extends Piece {
   }
 
   @override
-  void flip() {
+  void rotate() {
     switch (rotateKind % 2) {
       case 0:
         drawPieces = [
@@ -56,10 +56,6 @@ class LPiece extends Piece {
           PieceImpl(x: drawPieces[2].x, y: drawPieces[2].y),
           PieceImpl(x: drawPieces[3].x + 1, y: drawPieces[3].y - 1),
         ];
-        break;
-      case 2:
-        break;
-      case 3:
         break;
       default:
     }

@@ -56,7 +56,7 @@ class _GameState extends State<Game> {
                                         for (var i = 0; i < pp.length; i++) {
                                           if (pp[i].isActive) {
                                             setState(() {
-                                              pp[i].flip();
+                                              pp[i].rotate();
                                             });
                                           }
                                         }
