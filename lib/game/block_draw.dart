@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:tetris/game/draw_piece.dart';
 
-class PieceImpl implements DrawPiece {
+class BlockDraw {
   final int x;
   final int y;
   final Color color;
-  PieceImpl(
-      {required this.x, required this.y, this.color = Colors.purpleAccent});
+
+  BlockDraw({required this.x, required this.y, required this.color});
   double size = 0;
 
-  PieceImpl copyWith({int? x, int? y, Color? color}) =>
-      PieceImpl(x: x ?? this.x, y: y ?? this.y, color: color ?? this.color);
-
-  @override
   void paint(Canvas canvas, double width, double height) {
     if (width < 360) {
       size = width / 16.0;
@@ -29,10 +24,5 @@ class PieceImpl implements DrawPiece {
             height: size),
         Paint()..color = color);
     canvas.restore();
-  }
-
-  @override
-  String toString() {
-    return '$x $y';
   }
 }

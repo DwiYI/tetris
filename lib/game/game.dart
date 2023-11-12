@@ -14,6 +14,7 @@ class Game extends StatefulWidget {
 
 class _GameState extends State<Game> {
   var pp = <Piece>[JPiece()];
+  var isDrop = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,6 +23,7 @@ class _GameState extends State<Game> {
                   children: [
                     GameProcess(
                         pieces: pp,
+                        isDrop: isDrop,
                         maxWidth: constraints.maxWidth,
                         maxHeight: constraints.maxHeight),
                     Card(
@@ -40,7 +42,7 @@ class _GameState extends State<Game> {
                                         for (var i = 0; i < pp.length; i++) {
                                           if (pp[i].isActive) {
                                             setState(() {
-                                              pp[i].moveLeft();
+                                              pp[i].moveLeft(pp);
                                             });
                                           }
                                         }
@@ -73,7 +75,7 @@ class _GameState extends State<Game> {
                                         for (var i = 0; i < pp.length; i++) {
                                           if (pp[i].isActive) {
                                             setState(() {
-                                              pp[i].moveRight();
+                                              pp[i].moveRight(pp);
                                             });
                                           }
                                         }
@@ -86,7 +88,11 @@ class _GameState extends State<Game> {
                                   width: 70,
                                   height: 70,
                                   child: ElevatedButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        setState(() {
+                                          isDrop = true;
+                                        });
+                                      },
                                       child: const Text('Drop')),
                                 ),
                               ],
