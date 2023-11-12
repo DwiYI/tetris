@@ -95,4 +95,19 @@ extension ah on List<Piece> {
         .expand((element) => element)
         .toList();
   }
+
+  void removeBy(int y) {
+    for (var i = 0; i < length; i++) {
+      this[i].drawPieces.removeWhere((element) => element.y == y);
+    }
+  }
+
+  void moveBy(int y) {
+    for (var i = 0; i < length; i++) {
+      this[i].drawPieces = this[i]
+          .drawPieces
+          .map((e) => PieceImpl(x: e.x, y: e.y < y ? e.y + 1 : e.y))
+          .toList();
+    }
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tetris/game/board_painter.dart';
+import 'package:tetris/game/game.dart';
 import 'package:tetris/game/game_loop.dart';
 import 'package:tetris/game/game_painter.dart';
 import 'package:tetris/game/grid_painter.dart';
@@ -12,11 +13,13 @@ class GameProcess extends StatefulWidget {
       required this.maxWidth,
       required this.maxHeight,
       required this.pieces,
+      required this.controller,
       this.isDrop = false});
   final double maxHeight;
   final double maxWidth;
   final List<Piece> pieces;
   final bool isDrop;
+  final GameProcessController controller;
 
   @override
   State<GameProcess> createState() => _GameProcessState();
@@ -24,32 +27,42 @@ class GameProcess extends StatefulWidget {
 
 class _GameProcessState extends State<GameProcess> {
   late GameLoop gameLoop;
+  void checkIfCanRemoveLine() {
+    var point = widget.pieces.toPassivePieces();
 
-  List<List<bool>> board =
-      List.generate(23, (index) => List.generate(15, (index) => false));
+    var res = List.generate(23, (index) => 0);
 
-  void checkPieceInside() {
-    // test on ground or toucheach other
-    for (var i = 0; i < widget.pieces.length; i++) {
-      if (widget.pieces[i].isActive) {
-        // if (widget.pieces[i].checkOnGround(widget.pieces)) {
-        //   widget.pieces.add(LPiece());
-        //   isDrop = false;
-        //   widget.pieces[i].isActive = false;
-        // }
+    for (var i = 0; i <= 22; i++) {
+      var dd = point.where((element) => element.y == i).toList();
+      if (dd.isNotEmpty) {
+        res[i] = dd.map((e) => e.x).reduce((value, element) => value + element);
+        print(res[i]);
+        if (res[i] == 105) {
+          // delete this line
+          print(i);
+          widget.pieces.removeBy(i);
+          widget.pieces.moveBy(i);
+        }
       }
     }
   }
 
   void spawn() {
+    checkIfCanRemoveLine();
+    isDrop = false;
     widget.pieces.add(LPiece());
   }
 
   bool isDrop = false;
 
+  void drop() {
+    isDrop = true;
+  }
+
   @override
   void initState() {
     super.initState();
+    widget.controller.drop = drop;
     double time = 0;
     double period = 1;
     int i = 0;
@@ -70,7 +83,6 @@ class _GameProcessState extends State<GameProcess> {
           }
           print('object');
           setState(() {});
-          //checkPieceInside();
         }
       });
   }

@@ -12,9 +12,14 @@ class Game extends StatefulWidget {
   State<Game> createState() => _GameState();
 }
 
+class GameProcessController {
+  late void Function() drop;
+}
+
 class _GameState extends State<Game> {
   var pp = <Piece>[JPiece()];
   var isDrop = false;
+  final GameProcessController myController = GameProcessController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,6 +29,7 @@ class _GameState extends State<Game> {
                     GameProcess(
                         pieces: pp,
                         isDrop: isDrop,
+                        controller: myController,
                         maxWidth: constraints.maxWidth,
                         maxHeight: constraints.maxHeight),
                     Card(
@@ -90,7 +96,7 @@ class _GameState extends State<Game> {
                                   child: ElevatedButton(
                                       onPressed: () {
                                         setState(() {
-                                          isDrop = true;
+                                          myController.drop();
                                         });
                                       },
                                       child: const Text('Drop')),
