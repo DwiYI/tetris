@@ -9,10 +9,10 @@ class LPiece extends Piece {
     this.y = 0,
   }) : super(
           drawPieces: [
-            PieceImpl(x: 0, y: 0),
-            PieceImpl(x: 1, y: 0),
-            PieceImpl(x: 2, y: 0),
-            PieceImpl(x: 3, y: 0),
+            PieceImpl(x: 0 + x, y: 0 + y),
+            PieceImpl(x: 1 + x, y: 0 + y),
+            PieceImpl(x: 2 + x, y: 0 + y),
+            PieceImpl(x: 3 + x, y: 0 + y),
           ],
           isActive: true,
         );

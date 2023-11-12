@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:tetris/game/game_process.dart';
 import 'package:tetris/game/j_piece.dart';
+import 'package:tetris/game/l_piece.dart';
 import 'package:tetris/game/piece.dart';
 
 class Game extends StatefulWidget {
@@ -16,8 +17,9 @@ class GameProcessController {
 }
 
 class _GameState extends State<Game> {
-  var pp = <Piece>[JPiece()];
+  var pp = <Piece>[];
   var isDrop = false;
+  int score = 0;
   final GameProcessController myController = GameProcessController();
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,21 @@ class _GameState extends State<Game> {
                         isDrop: isDrop,
                         controller: myController,
                         maxWidth: constraints.maxWidth,
-                        maxHeight: constraints.maxHeight),
+                        maxHeight: constraints.maxHeight,
+                        score: (val) {
+                          setState(() {
+                            score = val;
+                          });
+                        }),
+                    Card(
+                      child: Container(
+                        padding: EdgeInsets.all(5),
+                        child: Text(
+                          'SCORE : $score',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
                     Card(
                       child: Container(
                         margin: const EdgeInsets.all(10),

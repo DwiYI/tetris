@@ -23,7 +23,7 @@ class GameLoop {
     }
   }
 
-  void destroy() {
+  void stop() {
     _ticker.stop();
   }
 
