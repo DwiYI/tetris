@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tetris/game/board_painter.dart';
 import 'package:tetris/game/game.dart';
 import 'package:tetris/game/game_loop.dart';
 import 'package:tetris/game/game_painter.dart';
@@ -36,10 +35,8 @@ class _GameProcessState extends State<GameProcess> {
       var dd = point.where((element) => element.y == i).toList();
       if (dd.isNotEmpty) {
         res[i] = dd.map((e) => e.x).reduce((value, element) => value + element);
-        print(res[i]);
         if (res[i] == 105) {
           // delete this line
-          print(i);
           widget.pieces.removeBy(i);
           widget.pieces.moveBy(i);
         }
@@ -65,7 +62,6 @@ class _GameProcessState extends State<GameProcess> {
     widget.controller.drop = drop;
     double time = 0;
     double period = 1;
-    int i = 0;
     isDrop = widget.isDrop;
     gameLoop = GameLoop()
       ..start()
@@ -81,7 +77,7 @@ class _GameProcessState extends State<GameProcess> {
               widget.pieces[i].moveDown(widget.pieces, spawn);
             }
           }
-          print('object');
+          //print('object');
           setState(() {});
         }
       });

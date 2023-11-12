@@ -64,22 +64,6 @@ abstract class Piece {
   }
 
   bool checkIsOverlapWithOtherPieces(List<PieceImpl> val1, List<Piece> pieces) {
-    //print(pieces.where((element) => element.isActive == false).toList().length);
-    bool isOverlap = false;
-    // for (var i = 0; i < pieces.length; i++) {
-    //   if (pieces[i].isActive == false) {
-    //     //print('${pieces[i].drawPieces}');
-    //     print('object');
-    //     print('${val1}');
-    //     //check overlap
-    //     isOverlap = pieces[i].drawPieces.any((element) =>
-    //         val1.any((currEle) => element.x == currEle.x) ||
-    //         val1.any((currEle) => element.y == currEle.y));
-    //   }
-    // }
-    //print(pieces.toPassivePieces().any((el) => el.y == 0));
-    print(val1.any(
-        (element) => pieces.toPassivePieces().any((el) => el.y == element.y)));
     return val1.any((element) => pieces
         .toPassivePieces()
         .any((el) => el.y == element.y && el.x == element.x));
@@ -88,7 +72,7 @@ abstract class Piece {
   void rotate();
 }
 
-extension ah on List<Piece> {
+extension Ah on List<Piece> {
   List<PieceImpl> toPassivePieces() {
     return where((element) => element.isActive == false)
         .map((e) => e.drawPieces)

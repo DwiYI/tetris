@@ -21,10 +21,10 @@ class JPiece extends Piece {
 
   @override
   void rotate() {
-    var _temp = <PieceImpl>[];
+    var temp = <PieceImpl>[];
     switch (rotateKind % 4) {
       case 0:
-        _temp = [
+        temp = [
           PieceImpl(
               x: drawPieces[0].x + 1, y: drawPieces[0].y, color: Colors.black),
           PieceImpl(x: drawPieces[1].x, y: drawPieces[1].y - 1),
@@ -34,7 +34,7 @@ class JPiece extends Piece {
 
         break;
       case 1:
-        _temp = [
+        temp = [
           PieceImpl(
               x: drawPieces[0].x - 1,
               y: drawPieces[0].y + 1,
@@ -45,7 +45,7 @@ class JPiece extends Piece {
         ];
         break;
       case 2:
-        _temp = [
+        temp = [
           PieceImpl(
               x: drawPieces[0].x - 1,
               y: drawPieces[0].y - 1,
@@ -56,7 +56,7 @@ class JPiece extends Piece {
         ];
         break;
       case 3:
-        _temp = [
+        temp = [
           PieceImpl(
               x: drawPieces[0].x + 1, y: drawPieces[0].y, color: Colors.red),
           PieceImpl(x: drawPieces[1].x, y: drawPieces[1].y + 1),
@@ -67,8 +67,8 @@ class JPiece extends Piece {
       default:
     }
 
-    if (checkCanNotRotate(_temp)) {
-      drawPieces = _temp;
+    if (checkCanNotRotate(temp)) {
+      drawPieces = temp;
       rotateKind++;
     }
   }
