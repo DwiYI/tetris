@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:tetris/game/game_process.dart';
-import 'package:tetris/game/j_piece.dart';
-import 'package:tetris/game/l_piece.dart';
 import 'package:tetris/game/piece.dart';
 
 class Game extends StatefulWidget {
@@ -40,10 +38,10 @@ class _GameState extends State<Game> {
                         }),
                     Card(
                       child: Container(
-                        padding: EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(5),
                         child: Text(
                           'SCORE : $score',
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),

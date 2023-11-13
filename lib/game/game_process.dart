@@ -6,8 +6,13 @@ import 'package:tetris/game/game_loop.dart';
 import 'package:tetris/game/game_painter.dart';
 import 'package:tetris/game/grid_painter.dart';
 import 'package:tetris/game/j_piece.dart';
+import 'package:tetris/game/i_piece.dart';
 import 'package:tetris/game/l_piece.dart';
+import 'package:tetris/game/o_piece.dart';
 import 'package:tetris/game/piece.dart';
+import 'package:tetris/game/s_piece.dart';
+import 'package:tetris/game/t_piece.dart';
+import 'package:tetris/game/z_piece.dart';
 
 class GameProcess extends StatefulWidget {
   const GameProcess(
@@ -69,11 +74,21 @@ class _GameProcessState extends State<GameProcess> {
   }
 
   Piece generatePiece() {
-    switch (randomBetween(0, 1)) {
+    switch (randomBetween(0, 6)) {
       case 0:
-        return JPiece(x: 5, y: -5);
+        return IPiece(x: 5, y: -5);
       case 1:
+        return JPiece(x: 5, y: -5);
+      case 2:
         return LPiece(x: 5, y: -5);
+      case 3:
+        return OPiece(x: 5, y: -5);
+      case 4:
+        return SPiece(x: 5, y: -5);
+      case 5:
+        return TPiece(x: 5, y: -5);
+      case 6:
+        return ZPiece(x: 5, y: -5);
       default:
         throw 'not found';
     }
@@ -98,13 +113,11 @@ class _GameProcessState extends State<GameProcess> {
         if (time >= (isDrop ? 0.05 : period)) {
           time = 0;
 
-          // print('${i++} object');
           for (var i = 0; i < widget.pieces.length; i++) {
             if (widget.pieces[i].isActive) {
               widget.pieces[i].moveDown(widget.pieces, spawn);
             }
           }
-          print('object');
           if (checkGameOver()) {
             gameLoop.stop();
             showGameOver();
